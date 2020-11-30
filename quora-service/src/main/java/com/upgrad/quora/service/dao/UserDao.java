@@ -26,6 +26,13 @@ import javax.persistence.PersistenceContext;
                 return null;
             }
         }
+        public UserEntity getUserByUsername(final String username) {
+            try {
+                return entityManager.createNamedQuery("userByUsername", UserEntity.class).setParameter("username", username).getSingleResult();
+            } catch (NoResultException nre) {
+                return null;
+            }
+        }
 
         public UserAuthTokenEntity createAuthToken(final UserAuthTokenEntity userAuthTokenEntity) {
             entityManager.persist(userAuthTokenEntity);
