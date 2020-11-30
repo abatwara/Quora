@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Base64;
 import java.util.UUID;
 
@@ -40,12 +39,12 @@ public class UserController {
         userEntity.setUserName(signupUserRequest.getUserName());
         userEntity.setEmail(signupUserRequest.getEmailAddress());
         userEntity.setPassword(signupUserRequest.getPassword());
-        userEntity.setMobilePhone(signupUserRequest.getContactNumber());
+        userEntity.setContactNumber(signupUserRequest.getContactNumber());
         userEntity.setSalt("1234abc");
         //userEntity.setPassword(cryptographyProvider.encrypt(signupUserRequest.getPassword(), "1234abc"));
         userEntity.setCountry(signupUserRequest.getCountry());
-        SimpleDateFormat objSDF = new SimpleDateFormat("dd-mm-yyyy");
-        userEntity.setDob(objSDF.parse("06-08-1987"));
+        //SimpleDateFormat objSDF = new SimpleDateFormat("dd-mm-yyyy");
+        userEntity.setDob("06-08-1987");
         userEntity.setAboutme(signupUserRequest.getAboutMe());
         userEntity.setRole("nonadmin");
         final UserEntity createdUserEntity = userBusinessService.signup(userEntity);

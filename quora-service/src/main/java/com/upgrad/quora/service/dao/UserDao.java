@@ -16,7 +16,11 @@ import javax.persistence.PersistenceContext;
         }
 
         public UserEntity getUser(final String userUuid) {
+            try{
             return entityManager.createNamedQuery("userByUuid", UserEntity.class).setParameter("uuid", userUuid).getSingleResult();
+            } catch (NoResultException nre) {
+                return null;
+            }
         }
 
         public UserEntity getUserByEmail(final String email) {

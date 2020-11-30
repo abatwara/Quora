@@ -9,7 +9,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.util.Date;
 
 @Entity
 @Table(name = "users")
@@ -60,7 +59,7 @@ public class UserEntity implements Serializable {
     @Column(name = "CONTACTNUMBER")
     @NotNull
     @Size(max = 50)
-    private String mobilePhone;
+    private String contactNumber;
 
 
     @Column(name = "SALT")
@@ -80,7 +79,7 @@ public class UserEntity implements Serializable {
     private String country;
 
     @Column(name = "DOB")
-    private Date dob;
+    private String dob;
 
     @Column(name = "ROLE")
     private String role;
@@ -138,8 +137,8 @@ public class UserEntity implements Serializable {
         this.lastName = lastName;
     }
 
-    public String getMobilePhone() {
-        return mobilePhone;
+    public String getContactNumber() {
+        return contactNumber;
     }
 
     public String getUserName() {
@@ -150,8 +149,8 @@ public class UserEntity implements Serializable {
         this.userName = userName;
     }
 
-    public void setMobilePhone(String mobilePhone) {
-        this.mobilePhone = mobilePhone;
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
     }
 
     public String getSalt() {
@@ -179,11 +178,11 @@ public class UserEntity implements Serializable {
         this.country = country;
     }
 
-    public Date getDob() {
+    public String getDob() {
         return dob;
     }
 
-    public void setDob(Date dob) {
+    public void setDob(String dob) {
         this.dob = dob;
     }
 

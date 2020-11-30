@@ -13,5 +13,6 @@ C:\Upgrad_PGD\Trello_quora\quora-service\src\main\java\com\upgrad\quora\service\
 C:\Upgrad_PGD\Trello_quora\quora-service\src\main\java\com\upgrad\quora\service\exception\AuthorizationFailedException.java
 C:\Upgrad_PGD\Trello_quora\quora-service\src\main\java\com\upgrad\quora\service\exception\SignUpRestrictedException.java
 C:\Upgrad_PGD\Trello_quora\quora-service\src\main\java\com\upgrad\quora\service\exception\SignOutRestrictedException.java
+C:\Upgrad_PGD\Trello_quora\quora-service\src\main\java\com\upgrad\quora\service\business\CommonBusinessService.java
 C:\Upgrad_PGD\Trello_quora\quora-service\src\main\java\com\upgrad\quora\service\entity\UserAuthTokenEntity.java
 C:\Upgrad_PGD\Trello_quora\quora-service\src\main\java\com\upgrad\quora\service\ServiceConfiguration.java
