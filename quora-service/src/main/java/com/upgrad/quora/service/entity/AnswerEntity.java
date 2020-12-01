@@ -10,6 +10,10 @@ import java.time.ZonedDateTime;
 
 @Entity
 @Table(name = "answer")
+@NamedQueries({
+        @NamedQuery(name = "getAnswerById", query = "select a from AnswerEntity a where a.uuid=:uuid"),
+        @NamedQuery(name = "getAllAnswersToQuestion", query = "select a from AnswerEntity a where a.questionEntity.uuid = :uuid")
+})
 public class AnswerEntity {
 
     @Id
@@ -36,6 +40,19 @@ public class AnswerEntity {
     @JoinColumn(name = "user_id")
     private UserEntity userEntity;
 
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "question_id")
+    private QuestionEntity questionEntity;
+
+    public QuestionEntity getQuestionEntity() {
+        return questionEntity;
+    }
+
+    public void setQuestionEntity(QuestionEntity questionEntity) {
+        this.questionEntity = questionEntity;
+    }
+
     public UserEntity getUserEntity() {
         return userEntity;
     }
@@ -43,7 +60,6 @@ public class AnswerEntity {
     public void setUserEntity(UserEntity userEntity) {
         this.userEntity = userEntity;
     }
-//    private QuestionEntity questionEntity;
 
 
     public Integer getId() {
