@@ -19,8 +19,6 @@ public class CommonBusinessService {
 
     public UserEntity getUser(final String userUuid, final String authorizationToken) throws UserNotFoundException,
             AuthenticationFailedException {
-
-
         UserAuthTokenEntity userAuthTokenEntity = userDao.getUserAuthToken(authorizationToken);
             if(userAuthTokenEntity==null)
                 throw new AuthenticationFailedException("ATHR-001","User has not signed in");
