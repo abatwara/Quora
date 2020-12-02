@@ -10,6 +10,7 @@ import java.util.Date;
 @NamedQueries(
         {
                 @NamedQuery(name = "questionAll", query = "select q from QuestionEntity q"),
+                @NamedQuery(name = "getQuestionById", query = "select q from QuestionEntity q where q.uuid=:uuid"),
                 @NamedQuery(name = "questionByUserId", query = "select q from QuestionEntity q where q.user_id = :user_id")
         }
 )
