@@ -1,5 +1,8 @@
 package com.upgrad.quora.service.entity;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -11,7 +14,7 @@ import java.util.Date;
         {
                 @NamedQuery(name = "questionAll", query = "select q from QuestionEntity q"),
                 @NamedQuery(name = "getQuestionById", query = "select q from QuestionEntity q where q.uuid=:uuid"),
-                @NamedQuery(name = "questionByUserId", query = "select q from QuestionEntity q where q.user_id = :user_id")
+                @NamedQuery(name = "questionByUserId", query = "select q from QuestionEntity q where q.userEntity.uuid= :user_id")
         }
 )
 public class QuestionEntity {
@@ -45,12 +48,12 @@ public class QuestionEntity {
         this.date = date;
     }
 
-    public Integer getUser_id() {
-        return user_id;
+    public UserEntity getUserEntity() {
+        return userEntity;
     }
 
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
+    public void setUserEntity(UserEntity userEntity) {
+        this.userEntity = userEntity;
     }
 
     @Column(name = "UUID")
@@ -66,7 +69,9 @@ public class QuestionEntity {
     @Column(name = "DATE")
     private Date date;
 
-    @Column(name = "USER_ID")
-    @NotNull
-    private Integer user_id;
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "user_id")
+    private UserEntity userEntity;
+
 }
