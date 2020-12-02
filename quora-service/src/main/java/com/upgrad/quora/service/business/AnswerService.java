@@ -36,8 +36,8 @@ public class AnswerService {
         }
 
         //Question ID validation.
-        QuestionEntity questionEntity = new QuestionEntity();
-        questionDao.getQuestionById(questionId);
+        QuestionEntity questionEntity = questionDao.getQuestionById(questionId);
+
         if (questionEntity == null) {
             throw new InvalidQuestionException("QUES-001", "The question entered is invalid");
         }
@@ -108,8 +108,7 @@ public class AnswerService {
         }
 
         //Question ID validation.
-        QuestionEntity questionEntity = new QuestionEntity();
-        questionDao.getQuestionById(questionId);
+        QuestionEntity questionEntity = questionDao.getQuestionById(questionId);
         if (questionEntity == null) {
             throw new InvalidQuestionException("QUES-001", "The question entered is invalid");
         }
