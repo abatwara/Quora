@@ -1,3 +1,4 @@
+/*
 package com.upgrad.quora.api.controller;
 
 import org.junit.Test;
@@ -45,4 +46,7 @@ public class UserControllerTest {
                 .andExpect(status().isUnauthorized())
                 .andExpect(MockMvcResultMatchers.jsonPath("code").value("SGR-001"));
     }
+
 }
+
+ */
