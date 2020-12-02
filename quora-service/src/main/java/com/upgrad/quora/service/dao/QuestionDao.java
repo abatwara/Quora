@@ -2,11 +2,13 @@ package com.upgrad.quora.service.dao;
 
 import com.upgrad.quora.service.entity.QuestionEntity;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Repository
+@Transactional
 public class QuestionDao {
 
     @PersistenceContext
