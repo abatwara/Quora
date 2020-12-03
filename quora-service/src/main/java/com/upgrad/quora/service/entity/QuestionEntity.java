@@ -6,7 +6,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Date;
+import java.time.ZonedDateTime;
 
 @Entity
 @Table(name = "question", schema = "public")
@@ -40,11 +40,11 @@ public class QuestionEntity {
         this.content = content;
     }
 
-    public Date getDate() {
+    public ZonedDateTime getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(ZonedDateTime date) {
         this.date = date;
     }
 
@@ -67,7 +67,7 @@ public class QuestionEntity {
     private String content;
 
     @Column(name = "DATE")
-    private Date date;
+    private ZonedDateTime date;
 
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)

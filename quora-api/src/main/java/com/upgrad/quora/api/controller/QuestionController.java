@@ -28,8 +28,6 @@ public class QuestionController {
         final QuestionEntity questionEntity = new QuestionEntity();
         questionEntity.setUuid(UUID.randomUUID().toString());
         questionEntity.setContent(questionRequest.getContent());
-        questionEntity.setUuid(questionEntity.getUuid());
-        questionEntity.setDate(new Date());
         final QuestionEntity createdQuestionEntity = questionService.createQuestion(questionEntity , authorization);
         QuestionResponse questionResponse = new QuestionResponse().id(createdQuestionEntity.getUuid()).status("Created");
         return new ResponseEntity<QuestionResponse>(questionResponse, HttpStatus.OK);

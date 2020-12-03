@@ -13,7 +13,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class QuestionService {
@@ -33,6 +35,10 @@ public class QuestionService {
         if(userAuthTokenEntity.getLogoutAt() != null) {
             throw new AuthorizationFailedException("ATHR-002", "User is signed out.Sign in first to post a question");
         }
+        UserEntity userId = userDao.getUser(userAuthTokenEntity.getUuid());
+        questionEntity.setUuid(UUID.randomUUID().toString());
+        questionEntity.setDate(ZonedDateTime.now());
+        questionEntity.setUserEntity(userId);
         return questionDao.createQuestion(questionEntity);
     }
     public List<QuestionEntity> getAllQuestions(final String authorizationToken) throws AuthorizationFailedException {
