@@ -45,4 +45,5 @@ public class UserControllerTest {
                 .andExpect(status().isUnauthorized())
                 .andExpect(MockMvcResultMatchers.jsonPath("code").value("SGR-001"));
     }
+
 }

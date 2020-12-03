@@ -11,5 +11,4 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ComponentScan("com.upgrad.quora.service")
 @EntityScan("com.upgrad.quora.service.entity")
-public class ServiceConfiguration {
-}
+public class ServiceConfiguration { }
