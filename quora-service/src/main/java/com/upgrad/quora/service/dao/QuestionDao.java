@@ -6,10 +6,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.NamedQuery;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Repository
+@Transactional
 public class QuestionDao {
 
     @PersistenceContext

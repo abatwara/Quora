@@ -6,6 +6,7 @@ import com.upgrad.quora.service.dao.UserDao;
 import com.upgrad.quora.service.entity.AnswerEntity;
 import com.upgrad.quora.service.entity.QuestionEntity;
 import com.upgrad.quora.service.entity.UserAuthTokenEntity;
+import com.upgrad.quora.service.entity.UserEntity;
 import com.upgrad.quora.service.exception.AnswerNotFoundException;
 import com.upgrad.quora.service.exception.AuthorizationFailedException;
 import com.upgrad.quora.service.exception.InvalidQuestionException;
@@ -40,10 +41,11 @@ public class AnswerService {
         if (questionEntity == null) {
             throw new InvalidQuestionException("QUES-001", "The question entered is invalid");
         }
-
+        UserEntity user = userDao.getUser(userAuthTokenEntity.getUuid());
         answerEntity.setUuid(UUID.randomUUID().toString());
         answerEntity.setDate(ZonedDateTime.now());
-//        answerEntity.setUserEntity(user);
+        answerEntity.setUserEntity(user);
+        answerEntity.setQuestionEntity(questionEntity);
         return answerDao.createAnswer(answerEntity);
     }
 
