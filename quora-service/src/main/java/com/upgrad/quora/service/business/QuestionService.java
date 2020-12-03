@@ -83,8 +83,7 @@ public class QuestionService {
             throw new AuthorizationFailedException("ATHR-002", "User is signed out.Sign in first to get all questions");
         }
 
-        QuestionEntity questionEntity = new QuestionEntity();
-        questionEntity = questionDao.getQuestionById(questionId);
+        QuestionEntity questionEntity = questionDao.getQuestionById(questionId);
         if (questionEntity != null) {
             if (!questionEntity.getUserEntity().getUuid().equals(userAuthTokenEntity.getUuid())) {
                 throw new AuthorizationFailedException("ATHR-003", "Only the question owner can edit the question");
@@ -108,8 +107,7 @@ public class QuestionService {
             throw new AuthorizationFailedException("ATHR-002", "User is signed out.Sign in first to get all questions");
         }
 
-        QuestionEntity questionEntity = new QuestionEntity();
-        questionEntity = questionDao.getQuestionById(questionId);
+        QuestionEntity questionEntity = questionDao.getQuestionById(questionId);
 
         if(questionEntity == null) {
             throw new InvalidQuestionException("QUES-001", "Entered question uuid does not exist");
