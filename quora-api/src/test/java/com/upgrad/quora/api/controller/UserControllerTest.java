@@ -1,4 +1,3 @@
-/*
 package com.upgrad.quora.api.controller;
 
 import org.junit.Test;
@@ -48,5 +47,3 @@ public class UserControllerTest {
     }
 
 }
-
- */
