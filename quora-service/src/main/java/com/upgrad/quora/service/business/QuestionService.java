@@ -113,11 +113,10 @@ public class QuestionService {
             throw new InvalidQuestionException("QUES-001", "Entered question uuid does not exist");
         }
 
-        if(userAuthTokenEntity.getUser().getRole().equals("Admin") || !userAuthTokenEntity.getUuid().equals(questionEntity.getUserEntity().getUuid())) {
-            throw new AuthorizationFailedException("ATHR-003", "Only the question owner or admin can delete the question");
+       if(userAuthTokenEntity.getUser().getRole().equalsIgnoreCase("admin") || userAuthTokenEntity.getUuid().equals(questionEntity.getUserEntity().getUuid())) {
+            return questionDao.deleteQuestion(questionId);
         }
-
-        return questionDao.deleteQuestion(questionId);
+        throw new AuthorizationFailedException("ATHR-003", "Only the question owner or admin can delete the question");
     }
 
 }
