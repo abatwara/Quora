@@ -30,7 +30,7 @@ public class UserController {
     @Autowired
     private UserBusinessService userBusinessService;
 
-    @RequestMapping(method = RequestMethod.POST, path = "/user/signup", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+     @RequestMapping(method = RequestMethod.POST, path = "/user/signup", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<SignupUserResponse> signup(final SignupUserRequest signupUserRequest) throws ParseException, SignUpRestrictedException {
         final UserEntity userEntity = new UserEntity();
         userEntity.setUuid(UUID.randomUUID().toString());
@@ -40,9 +40,8 @@ public class UserController {
         userEntity.setEmail(signupUserRequest.getEmailAddress());
         userEntity.setPassword(signupUserRequest.getPassword());
         userEntity.setContactNumber(signupUserRequest.getContactNumber());
-        userEntity.setSalt("1234abc");
         userEntity.setCountry(signupUserRequest.getCountry());
-        userEntity.setDob("06-08-1987");
+        userEntity.setDob(signupUserRequest.getDob());
         userEntity.setAboutme(signupUserRequest.getAboutMe());
         userEntity.setRole("nonadmin");
         final UserEntity createdUserEntity = userBusinessService.signup(userEntity);
