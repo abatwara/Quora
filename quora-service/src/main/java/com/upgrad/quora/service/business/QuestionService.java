@@ -32,7 +32,7 @@ public class QuestionService {
      * @param questionEntity
      * @param authorizationToken
      * @return
-     * @throws AuthorizationFailedException
+     * @throws AuthorizationFailedException - When user has signed out, or not signed in to perform operation
      */
 
 
@@ -76,8 +76,8 @@ public class QuestionService {
      * @param user_id
      * @param authorizationToken
      * @return
-     * @throws AuthorizationFailedException
-     * @throws UserNotFoundException
+     * @throws AuthorizationFailedException - When user has signed out, or not signed in to perform operation
+     * @throws UserNotFoundException - When user id which is passed to the request does not exist in the DB
      */
     public List<QuestionEntity> getAllQuestionsByUser(final String user_id, final String authorizationToken) throws AuthorizationFailedException, UserNotFoundException {
 
@@ -107,7 +107,7 @@ public class QuestionService {
      * @param authorizationToken
      * @return
      * @throws AuthorizationFailedException  - When user has signed out, or not signed in or logged in user is not the owner
-     * @throws InvalidQuestionException  - when question id passed to the request does not exist in the DB
+     * @throws InvalidQuestionException  - When question id passed to the request does not exist in the DB
      */
 
     @Transactional(propagation = Propagation.REQUIRED)
@@ -141,8 +141,8 @@ public class QuestionService {
      * @param questionId
      * @param authorizationToken
      * @return
-     * @throws AuthorizationFailedException
-     * @throws InvalidQuestionException
+     * @throws AuthorizationFailedException - When user has signed out, or not signed in to perform operation
+     * @throws InvalidQuestionException  - When the passed question Id does not exist
      */
 
     @Transactional(propagation = Propagation.REQUIRED)

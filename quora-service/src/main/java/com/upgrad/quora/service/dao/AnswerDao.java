@@ -15,15 +15,31 @@ public class AnswerDao {
 
     @PersistenceContext private EntityManager entityManager;
 
+    /**
+     * This method accepts a new answer entity and creates a new record in the database
+     * @param answerEntity
+     * @return
+     */
     public AnswerEntity createAnswer(AnswerEntity answerEntity){
         entityManager.persist(answerEntity);
         return answerEntity;
     }
 
+    /**
+     * This method updates the answer record in the database
+     * @param answerEntity
+     * @return
+     */
     public AnswerEntity editAnswer(AnswerEntity answerEntity){
         entityManager.merge(answerEntity);
         return answerEntity;
     }
+
+    /**
+     * This method queries DB using answerId parameter and fetches answer record
+     * @param answerId
+     * @return
+     */
 
     public AnswerEntity getAnswerById(String answerId){
         try {
@@ -33,6 +49,11 @@ public class AnswerDao {
         }
     }
 
+    /**
+     * This method deletes existing answer record in the database if the answer id exists
+     * @param answerId
+     * @return
+     */
     public AnswerEntity deleteAnswer(String answerId){
         AnswerEntity deleteAnswer = getAnswerById(answerId);
         if (deleteAnswer!=null){
@@ -41,6 +62,11 @@ public class AnswerDao {
         return deleteAnswer;
     }
 
+    /**
+     * This method queries the DB using question Id and fetches all answers for a specific question
+     * @param questionId
+     * @return
+     */
     public List<AnswerEntity> getAllAnswersToQuestion(String questionId){
         return entityManager.createNamedQuery("getAllAnswersToQuestion", AnswerEntity.class).setParameter("uuid", questionId).getResultList();
     }

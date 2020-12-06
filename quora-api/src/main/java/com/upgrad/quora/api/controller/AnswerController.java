@@ -23,6 +23,17 @@ public class AnswerController {
 
     @Autowired private AnswerService answerService;
 
+
+    /**
+     * This controller is invoked when request pattern matches /question/{questionId}/answer/create and main purpose is to create answer for a existing question
+     * @param accessToken
+     * @param questionId
+     * @param answerRequest
+     * @return
+     * @throws InvalidQuestionException
+     * @throws AuthorizationFailedException
+     */
+
     @RequestMapping(
             method = RequestMethod.POST,
             path = "/question/{questionId}/answer/create",
@@ -42,6 +53,16 @@ public class AnswerController {
         return new ResponseEntity<AnswerResponse>(answerResponse,HttpStatus.CREATED);
     }
 
+    /**
+     * This controller is invoked when request pattern matches /answer/edit/{answerId} and main purpose is to allow user update the existing question's
+     * answer in the DB
+     * @param accessToken
+     * @param answerId
+     * @param answerEditRequest
+     * @return
+     * @throws AuthorizationFailedException
+     * @throws AnswerNotFoundException
+     */
 
     @RequestMapping(
         method = RequestMethod.PUT,
@@ -63,6 +84,15 @@ public class AnswerController {
 
     }
 
+    /**
+     * This controller is invoked when request pattern matches /answer/delete/{answerId} and main purpose is to store delete existing answer for a question
+     * @param accessToken
+     * @param answerId
+     * @return
+     * @throws AuthorizationFailedException
+     * @throws AnswerNotFoundException
+     */
+
     @RequestMapping(
             method = RequestMethod.DELETE,
             path = "/answer/delete/{answerId}",
@@ -78,6 +108,16 @@ public class AnswerController {
         return new ResponseEntity<AnswerDeleteResponse>(answerDeleteResponse, HttpStatus.OK);
     }
 
+
+    /**
+     * This controller is invoked when request pattern matches /question/all/{questionId} and main purpose is to fetch
+     * all answers for a specific question from DB
+     * @param accessToken
+     * @param questionId
+     * @return
+     * @throws AuthorizationFailedException
+     * @throws InvalidQuestionException
+     */
     @RequestMapping(
             method = RequestMethod.GET,
             path = "/answer/all/{questionId}",
