@@ -25,7 +25,8 @@ public class AnswerController {
 
 
     /**
-     * This controller is invoked when request pattern matches /question/{questionId}/answer/create and main purpose is to create answer for a existing question
+     * This controller is invoked when request pattern matches /question/{questionId}/answer/create
+     * and main purpose is to create answer for a existing question
      * @param accessToken
      * @param questionId
      * @param answerRequest
@@ -54,8 +55,8 @@ public class AnswerController {
     }
 
     /**
-     * This controller is invoked when request pattern matches /answer/edit/{answerId} and main purpose is to allow user update the existing question's
-     * answer in the DB
+     * This controller is invoked when request pattern matches /answer/edit/{answerId}
+     * and main purpose is to allow user update the existing question's answer in the DB
      * @param accessToken
      * @param answerId
      * @param answerEditRequest
@@ -85,7 +86,8 @@ public class AnswerController {
     }
 
     /**
-     * This controller is invoked when request pattern matches /answer/delete/{answerId} and main purpose is to store delete existing answer for a question
+     * This controller is invoked when request pattern matches /answer/delete/{answerId} and
+     * main purpose is to store delete existing answer for a question
      * @param accessToken
      * @param answerId
      * @return

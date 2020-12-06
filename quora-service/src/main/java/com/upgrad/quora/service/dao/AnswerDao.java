@@ -37,7 +37,7 @@ public class AnswerDao {
 
     /**
      * This method queries DB using answerId parameter and fetches answer record
-     * @param answerId
+     * @param answerId - uuid of the answer record
      * @return
      */
 
@@ -51,7 +51,7 @@ public class AnswerDao {
 
     /**
      * This method deletes existing answer record in the database if the answer id exists
-     * @param answerId
+     * @param answerId - uuid of the answer record
      * @return
      */
     public AnswerEntity deleteAnswer(String answerId){
@@ -64,7 +64,7 @@ public class AnswerDao {
 
     /**
      * This method queries the DB using question Id and fetches all answers for a specific question
-     * @param questionId
+     * @param questionId - uuid of the question record
      * @return
      */
     public List<AnswerEntity> getAllAnswersToQuestion(String questionId){

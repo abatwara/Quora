@@ -61,6 +61,7 @@ public class QuestionService {
      */
     public List<QuestionEntity> getAllQuestions(final String authorizationToken) throws AuthorizationFailedException {
         UserAuthTokenEntity userAuthTokenEntity = userDao.getUserAuthToken(authorizationToken);
+
         if(userAuthTokenEntity == null) {
             throw new AuthorizationFailedException("ATHR-001", "User has not signed in");
         }

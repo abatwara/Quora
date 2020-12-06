@@ -69,7 +69,7 @@ public class AnswerService {
      * @param answerId
      * @return
      * @throws AuthorizationFailedException - When user has signed out, or not signed in to perform operation
-     * @throws AnswerNotFoundException - When answer id does not exist
+     * @throws AnswerNotFoundException - When answer id does not exist in the database
      */
 
 
@@ -105,8 +105,8 @@ public class AnswerService {
      * @param answerId
      * @param accessToken
      * @return
-     * @throws AuthorizationFailedException
-     * @throws AnswerNotFoundException
+     * @throws AuthorizationFailedException - When user has signed out, or not signed in to perform operation
+     * @throws AnswerNotFoundException - When the requested answer id does not exist in the database
      */
 
 
@@ -140,8 +140,8 @@ public class AnswerService {
      * @param questionId
      * @param accessToken
      * @return
-     * @throws AuthorizationFailedException
-     * @throws InvalidQuestionException
+     * @throws AuthorizationFailedException - When user has signed out, or not signed in to perform operation
+     * @throws InvalidQuestionException - When requested question id does not exist in the database
      */
 
     public List<AnswerEntity> getAllAnswersToQeuestion(String questionId, String accessToken) throws  AuthorizationFailedException, InvalidQuestionException{
