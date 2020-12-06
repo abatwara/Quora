@@ -37,11 +37,10 @@ public class UserBusinessService {
     }
     @Transactional(propagation = Propagation.REQUIRED)
     public UserAuthTokenEntity authenticate(final String username, final String password) throws AuthenticationFailedException {
-        UserEntity userEntity = userDao.getUserByEmail(username);
+        UserEntity userEntity = userDao.getUserByUsername(username);
         if (userEntity == null) {
-            throw new AuthenticationFailedException("ATH-001", "User with email not found");
+            throw new AuthenticationFailedException("ATH-001", "This username does not exist");
         }
-        System.out.println("Password : " + password);
         final String encryptedPassword = passwordCryptographyProvider.encrypt(password, userEntity.getSalt());
         if (encryptedPassword.equals(userEntity.getPassword())) {
             JwtTokenProvider jwtTokenProvider = new JwtTokenProvider(encryptedPassword);
