@@ -21,7 +21,7 @@ public class UserBusinessService {
     private PasswordCryptographyProvider passwordCryptographyProvider;
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public UserEntity signup(UserEntity userEntity) throws SignUpRestrictedException{
+    public UserEntity signup(UserEntity userEntity) throws SignUpRestrictedException {
         UserEntity userEntityEmail = userDao.getUserByEmail(userEntity.getEmail());
         UserEntity userEntityUserName = userDao.getUserByUsername(userEntity.getUserName());
         if (userEntityUserName != null) {
@@ -35,6 +35,7 @@ public class UserBusinessService {
         userEntity.setPassword(encryptedText[1]);
         return userDao.createUser(userEntity);
     }
+
     @Transactional(propagation = Propagation.REQUIRED)
     public UserAuthTokenEntity authenticate(final String username, final String password) throws AuthenticationFailedException {
         UserEntity userEntity = userDao.getUserByUsername(username);
@@ -59,8 +60,9 @@ public class UserBusinessService {
             throw new AuthenticationFailedException("ATH-002", "Password Failed");
         }
     }
+
     @Transactional(propagation = Propagation.REQUIRED)
-    public UserAuthTokenEntity signout(final String authorizationToken) throws SignOutRestrictedException{
+    public UserAuthTokenEntity signout(final String authorizationToken) throws SignOutRestrictedException {
         UserAuthTokenEntity userAuthTokenEntity = userDao.getUserAuthToken(authorizationToken);
         if (userAuthTokenEntity == null) {
             throw new SignOutRestrictedException("SGR-001", "User is not Signed in");

@@ -56,6 +56,7 @@ public class UserAuthTokenEntity implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
+
     public String getUuid() {
         return uuid;
     }
@@ -63,6 +64,7 @@ public class UserAuthTokenEntity implements Serializable {
     public void setUuid(String uuid) {
         this.uuid = uuid;
     }
+
     public UserEntity getUser() {
         return user;
     }

@@ -19,6 +19,16 @@ public class CommonController {
     @Autowired
     private CommonBusinessService commonBusinessService;
 
+    /**
+     * Controller Get method to provide the user details with mapping '/userprofile/{id}'
+     *
+     * @param userUuid      - userid of the user whose details need to be retrieved
+     * @param authorization - authorization header of logged-in user
+     * @return
+     * @throws UserNotFoundException         - throws when user is not present whose user id is provided
+     * @throws AuthenticationFailedException
+     * @throws AuthorizationFailedException
+     */
     @RequestMapping(method = RequestMethod.GET, path = "/userprofile/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<UserDetailsResponse> getUser(@PathVariable("id") final String userUuid,
                                                        @RequestHeader("authorization") final String authorization) throws UserNotFoundException, AuthenticationFailedException, AuthorizationFailedException {
@@ -34,4 +44,4 @@ public class CommonController {
                 .contactNumber(userEntity.getContactNumber());
         return new ResponseEntity<UserDetailsResponse>(userDetailsResponse, HttpStatus.OK);
     }
-    }
+}

@@ -70,7 +70,6 @@ public class UserEntity implements Serializable {
     private String salt;
 
 
-
     @Column(name = "ABOUTME")
     @NotNull
     private String aboutme;

@@ -26,7 +26,7 @@ public class AnswerEntity {
     @NotNull
     private String uuid;
 
-    @Column(name="ans")
+    @Column(name = "ans")
     @Size(max = 255)
     @NotNull
     private String answer;
