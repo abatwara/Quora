@@ -30,7 +30,15 @@ public class UserController {
     @Autowired
     private UserBusinessService userBusinessService;
 
-     @RequestMapping(method = RequestMethod.POST, path = "/user/signup", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    /**
+     * Controller metod for signup request mapping '/user/signup'
+     *
+     * @param signupUserRequest - all field values required for user signup
+     * @return
+     * @throws ParseException
+     * @throws SignUpRestrictedException - throws exception if existing username/email is used
+     */
+    @RequestMapping(method = RequestMethod.POST, path = "/user/signup", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<SignupUserResponse> signup(final SignupUserRequest signupUserRequest) throws ParseException, SignUpRestrictedException {
         final UserEntity userEntity = new UserEntity();
         userEntity.setUuid(UUID.randomUUID().toString());
@@ -49,6 +57,13 @@ public class UserController {
         return new ResponseEntity<SignupUserResponse>(userResponse, HttpStatus.CREATED);
     }
 
+    /**
+     * Controller method for Signin request mapping '/user/signin'
+     *
+     * @param authorization - authorization string in 'Basic email:password(encrypted)' form
+     * @return
+     * @throws AuthenticationFailedException - throws exception if wrong value for username/password is used
+     */
     @RequestMapping(method = RequestMethod.POST, path = "/user/signin", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<SigninResponse> signin(@RequestHeader("authorization") final String authorization) throws AuthenticationFailedException {
 
@@ -68,12 +83,19 @@ public class UserController {
         return new ResponseEntity<SigninResponse>(authorizedUserResponse, headers, HttpStatus.OK);
     }
 
+    /**
+     * controller method used for user signout request mapping '/user/signout'
+     *
+     * @param authorization - authorization in form of access token
+     * @return
+     * @throws SignOutRestrictedException - throws if wrong access token is passed
+     */
     @RequestMapping(method = RequestMethod.POST, path = "/user/signout", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<SignoutResponse> signout(@RequestHeader("authorization") final String authorization) throws SignOutRestrictedException {
 
         UserAuthTokenEntity userAuthToken = userBusinessService.signout(authorization);
         SignoutResponse signoutResponse = new SignoutResponse();
         signoutResponse.id(userAuthToken.getUuid()).setMessage("SIGNED OUT SUCCESSFULLY");
-        return new ResponseEntity<SignoutResponse>(signoutResponse,HttpStatus.OK);
+        return new ResponseEntity<SignoutResponse>(signoutResponse, HttpStatus.OK);
     }
 }
