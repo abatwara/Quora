@@ -26,6 +26,18 @@ public class AnswerService {
     @Autowired private UserDao userDao;
     @Autowired private QuestionDao questionDao;
 
+    /**
+     * This method takes answer entity, question Id and access token as parameters, validates uses identity whether signed in, else throws exceptions
+     * Also checks if question id is valid, then call DAO method to get logged
+     * @param answerEntity
+     * @param accessToken
+     * @param questionId
+     * @return
+     * @throws AuthorizationFailedException - When user has signed out, or not signed in to perform operation
+     * @throws InvalidQuestionException -  When the question id passed to request does not exist in the DB
+     */
+
+
     public AnswerEntity createAnswer(AnswerEntity answerEntity, String accessToken, String questionId) throws AuthorizationFailedException, InvalidQuestionException {
 
         //User authentication verification
@@ -48,6 +60,18 @@ public class AnswerService {
         answerEntity.setQuestionEntity(questionEntity);
         return answerDao.createAnswer(answerEntity);
     }
+
+    /**
+     * This method takes the updated answer string, question Id and authorization token , validates user's identity
+     * checks if the answer exists in the DB and then call DAO method to update the answer content
+     * @param answer
+     * @param accessToken
+     * @param answerId
+     * @return
+     * @throws AuthorizationFailedException - When user has signed out, or not signed in to perform operation
+     * @throws AnswerNotFoundException - When answer id does not exist in the database
+     */
+
 
     public AnswerEntity editAnswer(String answer, String accessToken, String answerId) throws AuthorizationFailedException, AnswerNotFoundException {
 
@@ -75,6 +99,17 @@ public class AnswerService {
         return answerDao.editAnswer(answerEntity);
     }
 
+    /**
+     * This method takes answer id and auth token as parameters, validates user identity and if user's role is admin or user is owner of the question
+     * it calls the DAO method to delete the answer from DB.
+     * @param answerId
+     * @param accessToken
+     * @return
+     * @throws AuthorizationFailedException - When user has signed out, or not signed in to perform operation
+     * @throws AnswerNotFoundException - When the requested answer id does not exist in the database
+     */
+
+
     @Transactional(propagation = Propagation.REQUIRED)
     public AnswerEntity deleteAnswer(String answerId, String accessToken) throws AuthorizationFailedException, AnswerNotFoundException{
 
@@ -98,6 +133,16 @@ public class AnswerService {
             throw new AuthorizationFailedException("ATHR-003","Only the answer owner can delete the answer");
         }
     }
+
+    /**
+     * This method accepts question id and jwt token as parameters , validates user's identity and then invokes DAO method to check if the
+     * question id exists in the database and if exists it fetches all answers for that question by interacting with DAO method
+     * @param questionId
+     * @param accessToken
+     * @return
+     * @throws AuthorizationFailedException - When user has signed out, or not signed in to perform operation
+     * @throws InvalidQuestionException - When requested question id does not exist in the database
+     */
 
     public List<AnswerEntity> getAllAnswersToQeuestion(String questionId, String accessToken) throws  AuthorizationFailedException, InvalidQuestionException{
         //User authentication verification

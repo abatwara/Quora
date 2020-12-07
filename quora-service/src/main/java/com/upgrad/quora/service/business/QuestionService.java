@@ -26,6 +26,16 @@ public class QuestionService {
     @Autowired
     private UserDao userDao;
 
+    /**
+     * This service method interacts with DAO class to check to if the user is authorized or not , then it fetches the user id for the logged in
+     * user and uses the passed questionEntity to add model properties and calls the DAO method to pass the created entity to the DB.
+     * @param questionEntity
+     * @param authorizationToken
+     * @return
+     * @throws AuthorizationFailedException - When user has signed out, or not signed in to perform operation
+     */
+
+
     @Transactional(propagation = Propagation.REQUIRED)
     public QuestionEntity createQuestion(QuestionEntity questionEntity, final String authorizationToken) throws AuthorizationFailedException {
         UserAuthTokenEntity userAuthTokenEntity = userDao.getUserAuthToken(authorizationToken);
@@ -41,8 +51,17 @@ public class QuestionService {
         questionEntity.setUserEntity(userId);
         return questionDao.createQuestion(questionEntity);
     }
+
+    /**
+     * This method takes auth token, fetches user authorization token and based on that handles authorization failures,
+     * Also interacts with DAO method to fetch all questions from database.
+     * @param authorizationToken
+     * @return
+     * @throws AuthorizationFailedException - When user has signed out, or not signed in to perform operation
+     */
     public List<QuestionEntity> getAllQuestions(final String authorizationToken) throws AuthorizationFailedException {
         UserAuthTokenEntity userAuthTokenEntity = userDao.getUserAuthToken(authorizationToken);
+
         if(userAuthTokenEntity == null) {
             throw new AuthorizationFailedException("ATHR-001", "User has not signed in");
         }
@@ -52,6 +71,15 @@ public class QuestionService {
         return questionDao.getAllQuestions();
     }
 
+    /**
+     *This method takes auth token and user ID and fetches user authorization token and based on that handles authorization failures,
+     * Also interacts with DAO method to fetch all questions by that specific user id which was passed as path parameter
+     * @param user_id
+     * @param authorizationToken
+     * @return
+     * @throws AuthorizationFailedException - When user has signed out, or not signed in to perform operation
+     * @throws UserNotFoundException - When user id which is passed to the request does not exist in the DB
+     */
     public List<QuestionEntity> getAllQuestionsByUser(final String user_id, final String authorizationToken) throws AuthorizationFailedException, UserNotFoundException {
 
         UserAuthTokenEntity userAuthTokenEntity = userDao.getUserAuthToken(authorizationToken);
@@ -71,6 +99,18 @@ public class QuestionService {
 
         return questionDao.getAllQuestionsByUser(user_id);
     }
+
+    /**
+     * This method takes the content of the question which needs to be updated, question Id and authorization token , validates user's identity
+     * checks if the question exists in the DB and then call DAO method to update the question content
+     * @param content
+     * @param questionId
+     * @param authorizationToken
+     * @return
+     * @throws AuthorizationFailedException  - When user has signed out, or not signed in or logged in user is not the owner
+     * @throws InvalidQuestionException  - When question id passed to the request does not exist in the DB
+     */
+
     @Transactional(propagation = Propagation.REQUIRED)
     public QuestionEntity editQuestionContent(String content, String questionId, final String authorizationToken) throws AuthorizationFailedException, InvalidQuestionException {
 
@@ -95,6 +135,16 @@ public class QuestionService {
         }
 
     }
+
+    /**
+     * This method takes question id and auth token as parameters, validates user identity and if user's role is admin or user is owner of the question
+     * it calls the DAO method to delete the question from DB.
+     * @param questionId
+     * @param authorizationToken
+     * @return
+     * @throws AuthorizationFailedException - When user has signed out, or not signed in to perform operation
+     * @throws InvalidQuestionException  - When the passed question Id does not exist
+     */
 
     @Transactional(propagation = Propagation.REQUIRED)
     public QuestionEntity deleteQuestion(String questionId, final String authorizationToken) throws AuthorizationFailedException,InvalidQuestionException {
